@@ -30,5 +30,8 @@
   "bugs": {
     "url": "https://github.com/RudySIMPLON/RandomText/issues"
   },
-  "homepage": "https://github.com/RudySIMPLON/RandomText#readme"
+  "homepage": "https://github.com/RudySIMPLON/RandomText#readme",
+  "dependencies": {
+    "faker": "^4.0.0"
+  }
 }
