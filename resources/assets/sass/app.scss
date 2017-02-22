@@ -8,9 +8,12 @@
 // // Bootstrap
 // @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+header{
+	margin-left: 40em;
 
+}
 .head{ 
-	margin-top:3em;
+	margin-top:5em;
 
 	display : inline-flex;
 }
@@ -24,6 +27,7 @@
   	// background-color: red;
   	margin-left:30%;
   	display : inline-flex;
+  	margin-top: 2em;
   }
 
 .Paragraphe{

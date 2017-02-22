@@ -17,7 +17,7 @@
 
 		</div>
 		<div class="Html">
-			<div>
+			<div >
 				<input type="checkbox" name>	
 				
 			</div>p
@@ -35,7 +35,7 @@
 	</div>
 
 	<div class="textarea">
-		<textarea name="" id="" cols="50" rows="10"></textarea>
+		<textarea name="textearea" id="textearea" cols="50" rows="10"></textarea>
 	</div>
 
 
