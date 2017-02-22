@@ -1,9 +1,42 @@
 
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+// @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 
-// Variables
-@import "variables";
+// // Variables
+// @import "variables";
 
-// Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+// // Bootstrap
+// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+header{
+	margin-left: 40em;
+
+}
+.head{ 
+	margin-top:5em;
+
+	display : inline-flex;
+}
+
+.Mot{
+  	// background-color: blue;
+  	margin-left:20em;
+  }
+
+  .Html{
+  	// background-color: red;
+  	margin-left:30%;
+  	display : inline-flex;
+  	margin-top: 2em;
+  }
+
+.Paragraphe{
+  	// background-color:blue;
+  	margin-left:50%;
+  }
+
+.textarea{
+	margin-left:25em;
+	margin-top:5em;
+}
+
