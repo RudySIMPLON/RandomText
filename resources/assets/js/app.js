@@ -5,23 +5,40 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
-
-const paragraphGenerator = {
+ require('./bootstrap');
 
  function init(){
- 	console.log("init");
  	listeners();
+ 	getParaphs()
  }
 
  function listeners(){
- 	console.log("listen");
+ 	console.log("listen" );
+ 	console.log(document.getElementById('valueParaSlider'));
+ 	document.getElementById('nbrPara').onchange = getParaphs;
+ 	document.getElementById('nbrPara').oninput = displayValueParagraph;
  }
 
- 
-}
-if(document.readyState != 'loading'){
- 	paragraphGenerator.init();
+ function displayValueParagraph(event){
+ 	console.log('slider oninput',event.target.value);
+ 	document.getElementById('valueParaSlider').innerText = event.target.value;
+ }
+
+ function getParaphs(event){
+ 	const nbrOfparagraphs = event? event.target.value : '4';
+ 	$.get(`/api/generateParagraphs/paragraphs/${nbrOfparagraphs}`)
+ 	.done(function(data){
+ 		document.getElementById('textearea').value = data;
+ 	});
+ }
+ $.ajaxSetup({
+ 	headers: {
+ 		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+ 	}
+ });
+
+ if(document.readyState != 'loading'){
+ 	init();
  } else {
- 	document.addEventListener('DOMContentLoaded', paragraphGenerator.init);
+ 	document.addEventListener('DOMContentLoaded', init);
  }
