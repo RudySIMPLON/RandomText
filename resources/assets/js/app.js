@@ -7,14 +7,21 @@
 
 require('./bootstrap');
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+const paragraphGenerator = {
 
-Vue.component('example', require('./components/Example.vue'));
+ function init(){
+ 	console.log("init");
+ 	listeners();
+ }
 
-const app = new Vue({
-    el: '#app'
-});
+ function listeners(){
+ 	console.log("listen");
+ }
+
+ 
+}
+if(document.readyState != 'loading'){
+ 	paragraphGenerator.init();
+ } else {
+ 	document.addEventListener('DOMContentLoaded', paragraphGenerator.init);
+ }

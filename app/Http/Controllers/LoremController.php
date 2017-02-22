@@ -9,6 +9,6 @@ class LoremController extends Controller
 {
 	public function generateParagraphs($numberOfParagraphs){
 		$faker = Faker::create();
-    	return ($faker->paragraphs($numberOfParagraphs, true));
+    	dd($faker->paragraphs($numberOfParagraphs, true));
 	}	
 }
