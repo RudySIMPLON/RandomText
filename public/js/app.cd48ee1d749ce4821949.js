@@ -71,14 +71,7 @@
 /***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-__webpack_require__(34);
+/* WEBPACK VAR INJECTION */(function($) {__webpack_require__(34);
 
 function init() {
   listeners();

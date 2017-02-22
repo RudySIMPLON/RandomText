@@ -8,35 +8,59 @@
 // // Bootstrap
 // @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
-header{
-	margin-left: 40em;
+.titre{
+
+	display :flex;
+	justify-content: center;
+	border:5px black solid; 
+	padding-top: 3em;
 
 }
+
+h1{
+	padding-top: -3em;
+	padding-bottom: 2em;
+	height: 10em;
+
+}
+
 .head{ 
 	margin-top:5em;
+	display :flex;
+	justify-content:space-around;
 
-	display : inline-flex;
 }
 
-.Mot{
-  	// background-color: blue;
-  	margin-left:20em;
-  }
 
-  .Html{
-  	// background-color: red;
-  	margin-left:30%;
-  	display : inline-flex;
-  	margin-top: 2em;
-  }
+.Html{
 
-.Paragraphe{
-  	// background-color:blue;
-  	margin-left:50%;
-  }
+	display : inline-flex;
+	margin-top: 2em;
+}
 
-.textarea{
-	margin-left:25em;
-	margin-top:5em;
+textarea {
+	border-radius: 1em ;
+
+	border:3px black solid; 
+	padding-top: 3em;
+
+
+}
+
+.divTextarea {
+
+	display :flex;
+	justify-content: center;
+	margin-top: 3em;
+
+}
+
+.background{
+
+	background-color:#E53A40;
+}
+body{
+	background-color:#E53A40;
+
 }
 
