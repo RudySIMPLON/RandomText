@@ -35,11 +35,11 @@
 	</div>
 
 	<div class="textarea">
-		<textarea name="textearea" id="textearea" cols="50" rows="10"></textarea>
+		<textarea name="textearea" id="textearea" cols="80" rows="10"></textarea>
 	</div>
 
 
-
-	
+	<script scr="{mix('/js/app.js')}}"></script>
 </body>
+
 </html>
