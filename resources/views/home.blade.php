@@ -17,9 +17,11 @@
 	<div class="head">
 
 		<div class="Mot">
-			<h3>nombre de mot</h3>
-			<input type="range" name="nbrMot" id="nbrMot"  class="nbrMot"
-			value="4" min="0" max="20">
+			<h3>nombre de phrases</h3>
+			<span id="valueMinSentencesSlider">2</span>
+			<input type="range" multiple name="nbrSentences" id="nbrSentences"  class="nbrSentences"
+			value="2,6" min="2" max="20">
+				<span id="valueMaxSentencesSlider">6</span>
 
 		</div>
 		<div class="Html">
@@ -27,10 +29,6 @@
 				<input type="checkbox" name="check-p" id="check-p" class="check-p">	
 				
 			</div>p <br><br>
-			<div>
-				<input type="checkbox" name="check-h2" id="check-h2" class="check-h2">	
-			</div>
-			h3
 		</div>
 
 		<div class="Paragraphe">

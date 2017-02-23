@@ -66,59 +66,87 @@
 /******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 0:
+/******/ ([
+/* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {__webpack_require__(34);
+/* WEBPACK VAR INJECTION */(function($) {__webpack_require__(7);
 
 function init() {
-  listeners();
-  getParaphs();
+	listeners();
+	getParagraphs();
 }
 
 function listeners() {
-  console.log("listen");
-  console.log(document.getElementById('valueParaSlider'));
-  document.getElementById('nbrPara').onchange = getParaphs;
-  document.getElementById('nbrPara').oninput = displayValueParagraph;
+	document.getElementById('nbrPara').oninput = displayValueParagraph;
+	document.getElementById('nbrPara').onchange = getParagraphs;
+
+	var sliderRangeSentences1 = document.getElementsByClassName('nbrSentences')[0];
+	var sliderRangeSentences2 = document.getElementsByClassName('nbrSentences')[1];
+	sliderRangeSentences1.oninput = displayValueSentences;
+	sliderRangeSentences2.oninput = displayValueSentences;
+	sliderRangeSentences1.onchange = getParagraphs;
+	sliderRangeSentences2.onchange = getParagraphs;
+}
+
+function getSentenceRange() {
+	return [document.getElementById('nbrSentences').valueLow, document.getElementById('nbrSentences').valueHigh];
+}
+
+function getNbrParagraph(event) {
+	var nbrOfparagraphs = event ? event.target.value : '4';
+	return nbrOfparagraphs;
 }
 
 function displayValueParagraph(event) {
-  console.log('slider oninput', event.target.value);
-  document.getElementById('valueParaSlider').innerText = event.target.value;
+	document.getElementById('valueParaSlider').innerText = event.target.value;
+}
+function displayValueSentences(event) {
+	document.getElementById('valueMinSentencesSlider').innerText = event.target.valueLow || getSentenceRange()[0];
+	document.getElementById('valueMaxSentencesSlider').innerText = event.target.valueHigh || getSentenceRange()[1];
 }
 
-function getParaphs(event) {
-  var nbrOfparagraphs = event ? event.target.value : '4';
-  $.get('/api/generateParagraphs/paragraphs/' + nbrOfparagraphs).done(function (data) {
-    document.getElementById('textearea').value = data;
-  });
+function getParagraphs() {
+	var nbrOfparagraphs = getNbrParagraph();
+	var rangeMinSentences = getSentenceRange()[0];
+	var rangeMaxSentences = getSentenceRange()[1];
+	$.get('/api/generateParagraphs/nbrParagraphs/' + nbrOfparagraphs + '/rangeOfSentences/\n\t\t' + rangeMinSentences + '/' + rangeMaxSentences).done(function (data) {
+		document.getElementById('textearea').value = data;
+	});
 }
+
 $.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
+	headers: {
+		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	}
 });
 
 if (document.readyState != 'loading') {
-  init();
+	init();
 } else {
-  document.addEventListener('DOMContentLoaded', init);
+	document.addEventListener('DOMContentLoaded', init);
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-
-/***/ 1:
+/* 1 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
 
-/***/ 14:
+__webpack_require__(0);
+module.exports = __webpack_require__(1);
+
+
+/***/ }),
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10345,49 +10373,11 @@ return jQuery;
 
 
 /***/ }),
-
-/***/ 15:
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ 2:
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(0);
-module.exports = __webpack_require__(1);
-
-
-/***/ }),
-
-/***/ 34:
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(36);
+window._ = __webpack_require__(10);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -10395,13 +10385,109 @@ window._ = __webpack_require__(36);
  * code may be modified to fit the specific needs of your application.
  */
 
-window.$ = window.jQuery = __webpack_require__(14);
-
-__webpack_require__(35);
+window.$ = window.jQuery = __webpack_require__(6);
+__webpack_require__(8);
+__webpack_require__(9);
 
 /***/ }),
+/* 8 */
+/***/ (function(module, exports) {
 
-/***/ 35:
+(function () {
+	"use strict";
+
+	var supportsMultiple = self.HTMLInputElement && "valueLow" in HTMLInputElement.prototype;
+
+	var descriptor = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value");
+
+	self.multirange = function (input) {
+		if (supportsMultiple || input.classList.contains("multirange")) {
+			return;
+		}
+
+		var values = input.getAttribute("value").split(",");
+		var min = +input.min || 0;
+		var max = +input.max || 100;
+		var ghost = input.cloneNode();
+
+		input.classList.add("multirange", "original");
+		ghost.classList.add("multirange", "ghost");
+
+		input.value = values[0] || min + (max - min) / 2;
+		ghost.value = values[1] || min + (max - min) / 2;
+
+		input.parentNode.insertBefore(ghost, input.nextSibling);
+
+		Object.defineProperty(input, "originalValue", descriptor.get ? descriptor : {
+			// Fuck you Safari >:(
+			get: function get() {
+				return this.value;
+			},
+			set: function set(v) {
+				this.value = v;
+			}
+		});
+
+		Object.defineProperties(input, {
+			valueLow: {
+				get: function get() {
+					return Math.min(this.originalValue, ghost.value);
+				},
+				set: function set(v) {
+					this.originalValue = v;
+				},
+				enumerable: true
+			},
+			valueHigh: {
+				get: function get() {
+					return Math.max(this.originalValue, ghost.value);
+				},
+				set: function set(v) {
+					ghost.value = v;
+				},
+				enumerable: true
+			}
+		});
+
+		if (descriptor.get) {
+			// Again, fuck you Safari
+			Object.defineProperty(input, "value", {
+				get: function get() {
+					return this.valueLow + "," + this.valueHigh;
+				},
+				set: function set(v) {
+					var values = v.split(",");
+					this.valueLow = values[0];
+					this.valueHigh = values[1];
+				},
+				enumerable: true
+			});
+		}
+
+		function update() {
+			ghost.style.setProperty("--low", 100 * ((input.valueLow - min) / (max - min)) + 1 + "%");
+			ghost.style.setProperty("--high", 100 * ((input.valueHigh - min) / (max - min)) - 1 + "%");
+		}
+
+		input.addEventListener("input", update);
+		ghost.addEventListener("input", update);
+
+		update();
+	};
+
+	multirange.init = function () {
+		Array.from(document.querySelectorAll("input[type=range][multiple]:not(.multirange)")).forEach(multirange);
+	};
+
+	if (document.readyState == "loading") {
+		document.addEventListener("DOMContentLoaded", multirange.init);
+	} else {
+		multirange.init();
+	}
+})();
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(jQuery) {/*!
@@ -12782,11 +12868,10 @@ if (typeof jQuery === 'undefined') {
 
 }(jQuery);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-
-/***/ 36:
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -29875,11 +29960,37 @@ if (typeof jQuery === 'undefined') {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15), __webpack_require__(38)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11), __webpack_require__(12)(module)))
 
 /***/ }),
+/* 11 */
+/***/ (function(module, exports) {
 
-/***/ 38:
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -29907,5 +30018,4 @@ module.exports = function(module) {
 
 
 /***/ })
-
-/******/ });
+/******/ ]);

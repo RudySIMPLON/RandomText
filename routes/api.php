@@ -17,4 +17,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/generateParagraphs/paragraphs/{numberOfParagraphs}', 'LoremController@generateParagraphs')->name('faker');
+Route::get('/generateParagraphs/nbrParagraphs/{nbrOfparagraphs}/rangeOfSentences/{rangeMinSentences}/{rangeMaxSentences}', 
+	'LoremController@generateParagraphs')->name('faker');
