@@ -16,6 +16,7 @@ function listeners(){
 	sliderRangeSentences1.onchange = getParagraphs;
 	sliderRangeSentences2.onchange = getParagraphs;
 
+	document.getElementById('check-p').onchange = makeHtmlReady.bind(makeHtmlReady);
 }
 
 function getSentenceRange(){
@@ -26,7 +27,7 @@ function getSentenceRange(){
 }
 
 function getNbrParagraph(event){
-	const nbrOfparagraphs = event? event.target.value : '4';
+	const nbrOfparagraphs = event? event.target.value : document.getElementById('nbrPara').value;
 	return nbrOfparagraphs;
 }
 
@@ -46,7 +47,22 @@ function getParagraphs(){
 		${rangeMinSentences}/${rangeMaxSentences}`)
 	.done(function(data){
 		document.getElementById('textearea').value = data;
+		console.log(document.getElementById('check-p'));
 	});
+}
+
+function makeHtmlReady(){
+	if(this.isHtmlReady){
+		getParagraphs();
+		this.isHtmlReady = false;
+	}else{
+		const arrText = document.getElementById('textearea').value.split("\n");
+		document.getElementById('textearea').value = arrText
+		.filter((i)=>i !== "")
+		.map((item)=>"<p>" + item + "</p>")
+		.join("\n\n");
+		this.isHtmlReady = true;
+	}
 }
 
 $.ajaxSetup({

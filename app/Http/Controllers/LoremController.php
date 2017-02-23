@@ -16,7 +16,7 @@ class LoremController extends Controller
 		for ($i=0; $i < $nbrOfparagraphs; $i++) { 
 			$paragraphs .= $faker->paragraph(
 				rand($rangeMinSentences, $rangeMaxSentences), true);
-			$paragraphs .= "\n\r";
+			$paragraphs .= "\n\n";
 		}
 		return $paragraphs;
 	}
