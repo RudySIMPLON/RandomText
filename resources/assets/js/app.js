@@ -16,7 +16,7 @@ function listeners(){
 	sliderRangeSentences1.onchange = getParagraphs;
 	sliderRangeSentences2.onchange = getParagraphs;
 
-	document.getElementById('check-p').onchange = makeHtmlReady.bind(makeHtmlReady);
+	document.getElementById('check-p').onchange = makeHtmlReady;
 }
 
 function getSentenceRange(){
@@ -47,20 +47,19 @@ function getParagraphs(){
 		${rangeMinSentences}/${rangeMaxSentences}`)
 	.done(function(data){
 		document.getElementById('textearea').value = data;
+		document.getElementById('check-p').checked = false;
 	});
 }
 
-function makeHtmlReady(){
-	if(this.isHtmlReady){
+function makeHtmlReady(event){
+	if(!event.target.checked){
 		getParagraphs();
-		this.isHtmlReady = false;
 	}else{
 		const arrText = document.getElementById('textearea').value.split("\n");
 		document.getElementById('textearea').value = arrText
 		.filter((i)=>i !== "")
 		.map((item)=>"<p>" + item + "</p>")
 		.join("\n\n");
-		this.isHtmlReady = true;
 	}
 }
 
