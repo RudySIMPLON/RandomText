@@ -47,7 +47,6 @@ function getParagraphs(){
 		${rangeMinSentences}/${rangeMaxSentences}`)
 	.done(function(data){
 		document.getElementById('textearea').value = data;
-		console.log(document.getElementById('check-p'));
 	});
 }
 

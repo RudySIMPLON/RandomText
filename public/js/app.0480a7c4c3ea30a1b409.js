@@ -114,7 +114,6 @@ function getParagraphs() {
 	var rangeMaxSentences = getSentenceRange()[1];
 	$.get(window.location.href + ('api/generateParagraphs/nbrParagraphs/' + nbrOfparagraphs + '/rangeOfSentences/\n\t\t' + rangeMinSentences + '/' + rangeMaxSentences)).done(function (data) {
 		document.getElementById('textearea').value = data;
-		console.log(document.getElementById('check-p'));
 	});
 }
 
