@@ -43,7 +43,7 @@ function getParagraphs(){
 	const nbrOfparagraphs = getNbrParagraph();
 	const rangeMinSentences = getSentenceRange()[0];
 	const rangeMaxSentences = getSentenceRange()[1];
-	$.get(`/api/generateParagraphs/nbrParagraphs/${nbrOfparagraphs}/rangeOfSentences/
+	$.get(window.location.href + `api/generateParagraphs/nbrParagraphs/${nbrOfparagraphs}/rangeOfSentences/
 		${rangeMinSentences}/${rangeMaxSentences}`)
 	.done(function(data){
 		document.getElementById('textearea').value = data;

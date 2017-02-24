@@ -112,7 +112,7 @@ function getParagraphs() {
 	var nbrOfparagraphs = getNbrParagraph();
 	var rangeMinSentences = getSentenceRange()[0];
 	var rangeMaxSentences = getSentenceRange()[1];
-	$.get('/api/generateParagraphs/nbrParagraphs/' + nbrOfparagraphs + '/rangeOfSentences/\n\t\t' + rangeMinSentences + '/' + rangeMaxSentences).done(function (data) {
+	$.get(window.location.href + ('api/generateParagraphs/nbrParagraphs/' + nbrOfparagraphs + '/rangeOfSentences/\n\t\t' + rangeMinSentences + '/' + rangeMaxSentences)).done(function (data) {
 		document.getElementById('textearea').value = data;
 		console.log(document.getElementById('check-p'));
 	});
