@@ -8,21 +8,23 @@
 // // Bootstrap
 // @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+
 @import "multirange";
+
 
 .titre{
 
 	display :flex;
 	justify-content: center;
 	border:5px black solid; 
-	padding-top: 3em;
+	padding-top: 1em;
 
 }
 
 h1{
-	padding-top: -3em;
+/*	padding-top: -3em;
 	padding-bottom: 2em;
-	height: 10em;
+	/*height: 10em;*/*/
 
 }
 
@@ -45,8 +47,6 @@ textarea {
 
 	border:3px black solid; 
 	padding-top: 3em;
-
-
 }
 
 .divTextarea {
@@ -54,7 +54,6 @@ textarea {
 	display :flex;
 	justify-content: center;
 	margin-top: 3em;
-
 }
 
 .background{
